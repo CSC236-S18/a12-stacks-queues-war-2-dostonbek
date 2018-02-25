@@ -1,4 +1,4 @@
-# Queue.py
+# Queue.py 
 # Dave Reed 02/24/2006
 #
 # from Data Structures and Algorithms Using Python and C++
