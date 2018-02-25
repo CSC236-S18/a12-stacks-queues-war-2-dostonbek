@@ -36,7 +36,7 @@ def main():
     print("")
     entry=input("How many words of the story would you like? (enter a number or 'all'): ")
 
-    val=fix_input(entry)
+    val=fix_input(entry) 
     print("")
     print ("STORY:"),
     for i in range(val):
