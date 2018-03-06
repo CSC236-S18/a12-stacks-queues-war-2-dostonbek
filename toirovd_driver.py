@@ -9,9 +9,12 @@
 # 
 ###########################################################
 
+from MyQueue import Queue
+from Stack import Stack
 from dealing import Deal 
 from player import Player
 import time
+
 
 
 def start(input):
@@ -39,10 +42,10 @@ def loop_again(loot_pile, player, comp):
 
     post: removes and returns first item in the queue'''
 
-    if player.PlayingPile == 0 and player.StoragePile == 0:         # if player's both piles are empty, then loses the game
+    if player.PlayingPile.size() == 0 and player.StoragePile.size() == 0:         # if player's both piles are empty, then loses the game
         print("Too bad! You ran out of cards in your both storage pile and playing pile!")
         print("Looks like you are not a very good player! You LOST!")
-    elif comp.PlayingPile == 0 and comp.PlayingPile == 0:           # if computer's both piles are empty, then loses the game
+    elif comp.PlayingPile.size() == 0 and comp.PlayingPile.size() == 0:           # if computer's both piles are empty, then loses the game
         print("Kudos to you, the Lord of Cards!")
         print("Computer ran out of cards in both storage pile and playing pile!")
         print("Which means you WON!")
@@ -59,24 +62,24 @@ def loop_again(loot_pile, player, comp):
         print()
         time.sleep(1)
 
-        loot_pile.append(pl_card)                                   # player's card is added to the loot
-        loot_pile.append(comp_card)                                 # computer's card is added to the loot
+        loot_pile.enqueue(pl_card)                                   # player's card is added to the loot
+        loot_pile.enqueue(comp_card)                                 # computer's card is added to the loot
 
         if pl_card > comp_card:                                     # of player's card is greater than computer's
             print("Your card is greater than the computer's card. Nice!!! You will collect all the cards!")
-            player.move_loot(loot_pile)                             # move the loot to player's storage pile  
+            player.move_loot(loot_pile.q)                             # move the loot to player's storage pile  
 
         elif pl_card < comp_card:                                   # if player's card is less than computer's
             print("Oh, no! Computer's card is greater than yours! Computer will collect all the cards!")
-            comp.move_loot(loot_pile)                               # move the loot to computer's storage pile
+            comp.move_loot(loot_pile.q)                               # move the loot to computer's storage pile
             
         elif pl_card == comp_card:
             print("No! Not again! You and computer have removed the same card again! This means WAR will continue!")
             print()
             time.sleep(1)
             print("Now you both need to add another card each to the loot pile without displaying the cards.")
-            loot_pile.append(player.remove_card())                  # remove one more card from player's playing pile without displaying
-            loot_pile.append(comp.remove_card())                    # remove one more card from computer's playing pile without displaying
+            loot_pile.enqueue(player.remove_card())                  # remove one more card from player's playing pile without displaying
+            loot_pile.enqueue(comp.remove_card())                    # remove one more card from computer's playing pile without displaying
             print()
             time.sleep(1)
             print("Now you both added a card each to the loot pile.")
@@ -103,14 +106,14 @@ def main():
 
     while start(inp):               # main loop of the game
 
-        loot_pile = []              # creating a list for a loot pile in the middle
+        loot_pile = Queue()              # creating a list for a loot pile in the middle
 
-        if player.PlayingPile == 0 and player.StoragePile == 0:             # if player's both piles are empty, then loses the game
+        if player.PlayingPile.size() == 0 and player.StoragePile.size() == 0:             # if player's both piles are empty, then loses the game
             print("Too bad! You ran out of cards in your both storage pile and playing pile!")
             print("Looks like you are not a very good player! You LOST!")
             break
 
-        elif comp.PlayingPile == 0 and comp.PlayingPile == 0:               # if computer's both piles are empty, then loses the game
+        elif comp.PlayingPile.size() == 0 and comp.StoragePile.size() == 0:               # if computer's both piles are empty, then loses the game
             print("Kudos to you, the Lord of Cards!")
             time.sleep(1)
             print("Computer ran out of cards in both storage pile and playing pile!")
@@ -131,24 +134,24 @@ def main():
                 print()
                 time.sleep(1)
 
-                loot_pile.append(pl_card)                                   # player's card is added to the loot
-                loot_pile.append(comp_card)                                 # computer's card is added to the loot
+                loot_pile.enqueue(pl_card)                                   # player's card is added to the loot
+                loot_pile.enqueue(comp_card)                                 # computer's card is added to the loot
 
                 if pl_card > comp_card:                                     # of player's card is greater than computer's
                     print("Your card is greater than the computer's card. Nice!!! You will collect all the cards!")
-                    player.move_loot(loot_pile)                             # move the loot to player's storage pile  
+                    player.move_loot(loot_pile.q)                             # move the loot to player's storage pile  
 
                 elif pl_card < comp_card:                                   # if player's card is less than computer's
                     print("Oh, no! Computer's card is greater than yours! Computer will collect all the cards!")
-                    comp.move_loot(loot_pile)                               # move the loot to computer's storage pile
+                    comp.move_loot(loot_pile.q)                               # move the loot to computer's storage pile
                     
                 elif pl_card == comp_card:
                     print("Oh, no! You and computer have removed the same card! This means WAAAAAAAAR !")
                     print()
                     time.sleep(1)
                     print("Now you both need to add another card each to the loot pile without displaying the cards.")
-                    loot_pile.append(player.remove_card())                  # remove one more card from player's playing pile without displaying
-                    loot_pile.append(comp.remove_card())                    # remove one more card from computer's playing pile without displaying
+                    loot_pile.enqueue(player.remove_card())                  # remove one more card from player's playing pile without displaying
+                    loot_pile.enqueue(comp.remove_card())                    # remove one more card from computer's playing pile without displaying
                     print()
                     time.sleep(1)
                     print("Now you both added a card each to the loot pile.")

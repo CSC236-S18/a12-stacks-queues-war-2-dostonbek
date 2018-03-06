@@ -9,7 +9,8 @@
 # 
 ###########################################################
 
-
+from Stack import Stack
+from MyQueue import Queue
 
 class Player:
 
@@ -19,15 +20,15 @@ class Player:
         
         """assigning initial values of players"""
 
-        self.PlayingPile = []            # stack 
-        self.StoragePile = []           # queue 
+        self.PlayingPile = Stack()          # stack 
+        self.StoragePile = Queue()           # queue 
 
     def remove_card(self):
 
         """Removes card from the playing piles of players"""
 
-        if len(self.PlayingPile) > 0:           # if not empty, return the card on top     
-            pop_card = self.PlayingPile.pop(-1)
+        if self.PlayingPile.size() > 0:           # if not empty, return the card on top     
+            pop_card = self.PlayingPile.pop()
             return pop_card
         else:   
             self.move_storage()                 # if empty, refill it with cards from the storage pile
@@ -49,7 +50,7 @@ class Player:
         the player, if the player wins"""
         
         for i in loot_pile:
-            self.StoragePile.append(i)
+            self.StoragePile.enqueue(i)
 
     def move_storage(self):
 
@@ -57,10 +58,10 @@ class Player:
         
         print("Playing pile became empty. Now refilling it with cards from storage pile.")
         print()
-        for i in self.StoragePile:
-            self.PlayingPile.append(i)
+        for i in self.StoragePile.q:
+            self.PlayingPile.push(i)
 
-        self.StoragePile = []                   # after finishing the move, empty the storage pile
+        self.StoragePile = Queue()                   # after finishing the move, empty the storage pile
 
 
         

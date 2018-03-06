@@ -46,6 +46,6 @@ class Deal:
 
         x = len(self.dealingPile) - 1
         for i in range(25):
-            self.player.PlayingPile.append(self.dealingPile[x])
-            self.comp.PlayingPile.append(self.dealingPile[x-1])
+            self.player.PlayingPile.push(self.dealingPile[x])
+            self.comp.PlayingPile.push(self.dealingPile[x-1])
             x -= 2
