@@ -1,62 +1,66 @@
-##########################################################################
+###########################################################
 # Author: Dostonbek Toirov
 # Username: toirovd 
 # 
-##########################################################################
-# Acknowledgement: 
-#
-#
-##########################################################################
+# Purpose: Creating a card war game while building up knowledge
+#           on queues and stacks
+###########################################################
+# Acknowledgement:
+# 
+###########################################################
 
 
 
 class Player:
 
+    """Used to make instances of players"""
+
     def __init__(self):
-        # possibly useful instance variables
-        self.Current = None             # my currently displayed card
-        self.currentState = None        # keeps track of the state of play
+        
+        """assigning initial values of players"""
+
         self.PlayingPile = []            # stack 
         self.StoragePile = []           # queue 
 
-    def make_move():
-        # initiates a round of play and communicates play-by-play during the round
-        # returns true when the game is still in play
-        # returns false when the game is over
-        # Communicates an appropriate message about whether the user beat the computer
-        pass
-
     def remove_card(self):
-        # Precondition: myPlayingPile is not empty 
-        # If it is not empty, the function removes a card from myPlayingPile, 
-        # returning the stored value
-        if len(self.PlayingPile) > 0:
+
+        """Removes card from the playing piles of players"""
+
+        if len(self.PlayingPile) > 0:           # if not empty, return the card on top     
             pop_card = self.PlayingPile.pop(-1)
             return pop_card
-        else:
-            self.move_storage()
-            pop_card = self.remove_card()
-            return pop_card
+        else:   
+            self.move_storage()                 # if empty, refill it with cards from the storage pile
+            pop_card = self.remove_card()       # then call the remove function again
+            return pop_card                     # and return the card on top
 
     def display_card(self, card, player):
-        # displays a card on the screen and returns the value
-        if player == "human":
+
+        """displays the player's removed card"""
+
+        if player == "human":                   # if a human player, display his/her removed card
             print("Your have displayed a card " + str(card))
-        elif player == "comp":
+        elif player == "comp":                  # if a computer player, display its removed card
             print("Computer has displayed a card " + str(card))
 
     def move_loot(self, loot_pile):
-        # moves everything from lootPile to myStoragePile    
+
+        """moves the cards in the loot pile to the storage pile of
+        the player, if the player wins"""
+        
         for i in loot_pile:
             self.StoragePile.append(i)
 
     def move_storage(self):
-        # moves everything from myStoragePile to myPlayingPile
-        print("Your playing pile became empty. Now refilling it with cards from your storage pile.")
+
+        """moves everything from storage pile to a playing pile"""
+        
+        print("Playing pile became empty. Now refilling it with cards from storage pile.")
+        print()
         for i in self.StoragePile:
             self.PlayingPile.append(i)
-        print("moved the storage to playing")
-        self.StoragePile = []
+
+        self.StoragePile = []                   # after finishing the move, empty the storage pile
 
 
         
