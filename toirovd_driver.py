@@ -45,7 +45,7 @@ def loop_again(loot_pile, player, comp):
     if player.PlayingPile.size() == 0 and player.StoragePile.size() == 0:         # if player's both piles are empty, then loses the game
         print("Too bad! You ran out of cards in your both storage pile and playing pile!")
         print("Looks like you are not a very good player! You LOST!")
-    elif comp.PlayingPile.size() == 0 and comp.PlayingPile.size() == 0:           # if computer's both piles are empty, then loses the game
+    elif comp.PlayingPile.size() == 0 and comp.StoragePile.size() == 0:           # if computer's both piles are empty, then loses the game
         print("Kudos to you, the Lord of Cards!")
         print("Computer ran out of cards in both storage pile and playing pile!")
         print("Which means you WON!")
