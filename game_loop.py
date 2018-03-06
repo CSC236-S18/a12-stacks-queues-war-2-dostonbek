@@ -143,7 +143,7 @@ def main():
                     comp.move_loot(loot_pile)                               # move the loot to computer's storage pile
                     
                 elif pl_card == comp_card:
-                    print("No! Not again! You and computer have removed the same card again! This means WAR will continue!")
+                    print("Oh, no! You and computer have removed the same card! This means WAAAAAAAAR !")
                     print()
                     time.sleep(1)
                     print("Now you both need to add another card each to the loot pile without displaying the cards.")
